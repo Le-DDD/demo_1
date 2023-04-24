@@ -1,0 +1,48 @@
+/*
+//  main.cpp
+//  DDDLe
+//
+//  Created by Le on 2023/3/30.
+*/
+
+#include <iostream>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    string filename = "/Users/le/Downloads/demo.txt";
+    ifstream input(filename);  // 打开文件
+    if (!input) {
+        cout << "无法打开文件!" << endl;
+        return 1;
+    }
+
+    string line;
+    getline(input, line);
+
+    vector<string> lines;
+    lines.push_back(line);
+
+    while (getline(input, line)) {
+        lines.push_back(line);
+    }
+
+    ofstream output(filename);  // 打开文件
+    if (!output) {
+        cout << "无法打开文件!" << endl;
+        return 1;
+    }
+
+    output << lines[0];
+    for (int i = 1; i < lines.size(); i++) {
+        output << "" << endl;
+        output << lines[i];
+    }
+
+    output.close();
+    input.close();
+
+    return 0;
+}
